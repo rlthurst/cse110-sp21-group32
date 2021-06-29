@@ -1,5 +1,5 @@
 # Task Manager
-Local: https://rlthurst.github.io/cse110-sp21-group32/
+Local: https://rlthurst.github.io/task-manager/
 
 Live: TBD
 
