@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="./index.js"></script>
+    <link rel="stylesheet" type="text/css" href="./index.css">
+</head>
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="active" href="/signup">Signup</a></li>
+    <li><a href="/login">Login</a></li>
+    <li><a href="javascript:this.click();" id='logout-button'>Logout</a></li>
+    <li><a href="javascript:this.click();" id='user-button'>Fetch</a></li>
+    <span class="header-text">Bullet Journal</spab>
+  </ul>
+<body>
+    <div class='container'>
+        <div class='section'>
+            <form id='sign-up'>
+                <table border="0" cellpadding="10" cellspacing="1" width="500" align="center" class="tblLogin">
+                    <tr class="tableheader">
+                    <td align="center" colspan="2">Sign Up</td>
+                    </tr>
+                    <tr class="tablerow">
+                    <td>
+                    <input type="text" name="userName" placeholder="User Name" class="login-input"></td>
+                    </tr>
+                    <tr class="tablerow">
+                    <td>
+                    <input type="password" name="password" placeholder="Password" class="login-input"></td>
+                    </tr>
+                    <tr class="tableheader">
+                    <td align="center" colspan="2"><input type="submit" name="submit" value="Submit" class="btnSubmit"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
