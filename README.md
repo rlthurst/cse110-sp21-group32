@@ -1,7 +1,7 @@
 # Task Manager
 Local: https://rlthurst.github.io/task-manager/
 
-Live: pageus.site
+Live: https://pageus.site
 
 ### Known working versions/systems
 
