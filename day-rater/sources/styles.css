@@ -1,0 +1,279 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  min-width: 400px;
+	font-family: calibri;
+  border-top: none;
+}
+
+/* Header CSS */
+header ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  width: 100vw;
+  z-index: 100;
+  min-width: 400px;
+	font-family: calibri;
+}
+header li {
+  float: left;
+}
+header li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.fa-bars:hover {
+background-color: #111;
+}
+/* Change the link color to #111 (black) on hover */
+header li a:hover {
+  background-color: #111;
+}
+.header-text {
+  padding: 14px 16px;
+  color: white;
+  float: right;
+}
+
+/* This is a style css to the index.html in the root */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  overflow-y: hidden;
+}
+
+#left_menu {
+    box-sizing: border-box;
+    width: 400px;
+    height: 100vh;
+    padding-top: 25px;
+    padding-left: 35px;
+    padding-right: 35px;
+    position: fixed;
+    left: 0;
+    transition: left .25s cubic-bezier(.4,0,.2,1);
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #fafafa;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    background-color: #333;
+    display: flex;
+    z-index: 100;
+}
+
+.category-header {
+  padding: 5px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#category-show {
+  color: rgb(192,192,192);
+  -webkit-transition: 0.15s ease-in-out;
+  -moz-transition: 0.15s ease-in-out;
+  -o-transition: 0.15s ease-in-out;
+  transition: 0.15s ease-in-out;
+}
+
+.category-open {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#category-toggle {
+  margin-left: auto;
+  -webkit-appearance: none;
+  background-color: #fafafa;
+  padding: 10px;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+  margin-right: 5px;
+}
+
+#category-toggle:checked::after {
+  content: "✔";
+  font-size: 20px;
+  position: absolute;
+  top: -4px;
+  left: 3px;
+  color: black;
+  animation: fade-up 0.8s ease;
+}
+
+#new-category {
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 100%;
+}
+
+#new-category:hover {
+  background-color: rgba(25, 25, 25, 0.379) !important;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  flex-direction: column;
+  padding-top: 5vh;
+}
+
+#dayForm {
+  display: flex;
+  justify-content: center;
+}
+
+fieldset {
+  display: inline-block;
+  max-width: 800px;
+  padding: 10px;
+  line-height: 2;
+  width: 80%;
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 15px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  border-radius: 5px;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #ebeccc;
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #ebeccc;
+  cursor: pointer; /* Cursor on hover */
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.\31 0,
+.ten,
+.\31 0::-moz-range-thumb,
+.\31 0::-webkit-slider-thumb {
+  background: #409abf !important;
+	border: 1px solid black;
+}
+.\39,
+.nine,
+.\39::-moz-range-thumb,
+.\39::-webkit-slider-thumb {
+  background: #4fcf8a !important;
+	border: 1px solid black;
+}
+.\38,
+.eight,
+.\38::-moz-range-thumb,
+.\38::-webkit-slider-thumb {
+  background: #88d176 !important;
+	border: 1px solid black;
+}
+.\37,
+.seven,
+.\37::-moz-range-thumb,
+.\37::-webkit-slider-thumb {
+  background: #aed65c !important;
+	border: 1px solid black;
+}
+.\36,
+.six,
+.\36::-moz-range-thumb,
+.\36::-webkit-slider-thumb {
+  background: #d9dc3a !important;
+	border: 1px solid black;
+}
+.\35,
+.five,
+.\35::-moz-range-thumb,
+.\35::-webkit-slider-thumb {
+  background: #fee51a !important;
+	border: 1px solid black;
+}
+.\34,
+.four,
+.\34::-moz-range-thumb,
+.\34::-webkit-slider-thumb {
+  background: #fdc927 !important;
+	border: 1px solid black;
+}
+.\33,
+.three,
+.\33::-moz-range-thumb,
+.\33::-webkit-slider-thumb {
+  background: #fda833 !important;
+	border: 1px solid black;
+}
+.\32,
+.two,
+.\32::-moz-range-thumb,
+.\32::-webkit-slider-thumb {
+  background: #ff8541 !important;
+	border: 1px solid black;
+}
+.\31,
+.one,
+.\31::-moz-range-thumb,
+.\31::-webkit-slider-thumb {
+  background: #fc674d !important;
+	border: 1px solid black;
+}
+.\30,
+.zero,
+.\30::-moz-range-thumb,
+.\30::-webkit-slider-thumb {
+  background: #f13d49 !important;
+	border: 1px solid black;
+}

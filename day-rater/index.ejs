@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <title>Day Rater</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="./sources/styles.css" />
+  <link rel="stylesheet" href="./sources/calender.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" crossorigin="anonymous">
+  <link rel="icon" href="favicon.ico">
+</head>
+
+<body class="main-view default-view">
+  <header>
+    <ul>
+      <!--
+      <li><i id="menu-bar" class="fas fa-bars fa-lg" style="color: #f8f8ff; padding: 15.6px; cursor: pointer;"></i></li>
+    -->
+      <li><a class="active" href="/">Home</a></li>
+      <li><a href="/signup">Signup</a></li>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/logout" id='logout-button'>Logout</a></li>
+      <li class="header-text"><%= username %>
+      </li>
+    </ul>
+  </header>
+  <main style="padding-top: 47.2px">
+
+    <div id="left_menu" style="display: none;">
+    </div>
+    <div id="left_filler" style="width: 400px; display: none;"></div>
+
+    <template id="calendarTemplate">
+      <div class="calendar">
+        <div class="front">
+          <div class="current-date">
+            <i class="fas fa-angle-left" style="color: white; padding: 10px;"></i>
+            <h1 id="monthVal">January 2016</h1>
+            <i class="fas fa-angle-right" style="color: white; padding: 10px;"></i>
+          </div>
+          <div class="current-month">
+            <ul class="week-days">
+              <li>SUN</li>
+              <li>MON</li>
+              <li>TUE</li>
+              <li>WED</li>
+              <li>THU</li>
+              <li>FRI</li>
+              <li>SAT</li>
+            </ul>
+            <div class="weeks">
+              <div class="first">
+                <span class="last-month">28</span>
+                <span class="last-month">29</span>
+                <span class="last-month">30</span>
+                <span class="last-month">31</span>
+                <span>01</span>
+                <span>02</span>
+                <span>03</span>
+              </div>
+              <div class="second">
+                <span>04</span>
+                <span>05</span>
+                <span class="event">06</span>
+                <span>07</span>
+                <span>08</span>
+                <span>09</span>
+                <span>10</span>
+              </div>
+              <div class="third">
+                <span>11</span>
+                <span>12</span>
+                <span>13</span>
+                <span>14</span>
+                <span class="active">15</span>
+                <span>16</span>
+                <span>17</span>
+              </div>
+              <div class="fourth">
+                <span>18</span>
+                <span>19</span>
+                <span>20</span>
+                <span>21</span>
+                <span>22</span>
+                <span>23</span>
+                <span>24</span>
+              </div>
+              <div class="fifth">
+                <span>25</span>
+                <span>26</span>
+                <span>27</span>
+                <span>28</span>
+                <span>29</span>
+                <span>30</span>
+                <span>31</span>
+              </div>
+              <div class="sixth"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <template id="dayTemplate">
+      <form id="dayForm" style="padding: 10px;" onreset='document.getElementById("dayValue").textContent = 5;
+      dayRating.classList.remove(...dayRating.classList);
+      dayRating.classList.add("slider");
+      dayRating.classList.add(String(5));'>
+        <fieldset>
+          <legend id="dateLegend">8-4-2021</legend>
+          <label for="dayRating">Rate your day: </label>
+          <span id="dayValue">5</span>
+          <br>
+          <input type="range" min="0" max="10" value="5" class="slider" id="dayRating" oninput='dayValue.textContent = dayRating.value;
+          dayRating.classList.remove(...dayRating.classList);
+          dayRating.classList.add("slider");
+          dayRating.classList.add(String(dayRating.value));'>
+          <br>
+          <label for="dayBody">How was your day?</label>
+          <br>
+          <textarea rows="5" cols="30" id="dayBody" style="width: 100%"></textarea>
+          <br>
+          <button type="reset" value="reset" style="float:left;">Reset</button>
+          <input type="button" value="Delete" id="deleteBtn" style="float:left;">
+          <input type="button" value="Submit" id="submit" style="float: right;" onclick="submitEvent()">
+        </fieldset>
+      </form>
+    </template>
+
+    <div class="container" id="container">
+      <div class="calendar">
+        <div class="front">
+          <div class="current-date">
+            <i class="fas fa-angle-left" style="color: white; padding: 10px;"></i>
+            <h1 id="monthVal">January 2016</h1>
+            <i class="fas fa-angle-right" style="color: white; padding: 10px;"></i>
+          </div>
+          <div class="current-month">
+            <ul class="week-days">
+              <li>SUN</li>
+              <li>MON</li>
+              <li>TUE</li>
+              <li>WED</li>
+              <li>THU</li>
+              <li>FRI</li>
+              <li>SAT</li>
+            </ul>
+            <div class="weeks">
+              <div class="first">
+                <span class="last-month">28</span>
+                <span class="last-month">29</span>
+                <span class="last-month">30</span>
+                <span class="last-month">31</span>
+                <span>01</span>
+                <span>02</span>
+                <span>03</span>
+              </div>
+              <div class="second">
+                <span>04</span>
+                <span>05</span>
+                <span class="event">06</span>
+                <span>07</span>
+                <span>08</span>
+                <span>09</span>
+                <span>10</span>
+              </div>
+              <div class="third">
+                <span>11</span>
+                <span>12</span>
+                <span>13</span>
+                <span>14</span>
+                <span class="active">15</span>
+                <span>16</span>
+                <span>17</span>
+              </div>
+              <div class="fourth">
+                <span>18</span>
+                <span>19</span>
+                <span>20</span>
+                <span>21</span>
+                <span>22</span>
+                <span>23</span>
+                <span>24</span>
+              </div>
+              <div class="fifth">
+                <span>25</span>
+                <span>26</span>
+                <span>27</span>
+                <span>28</span>
+                <span>29</span>
+                <span>30</span>
+                <span>31</span>
+              </div>
+              <div class="sixth"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form id="dayForm" style="padding: 10px;" onreset='document.getElementById("dayValue").textContent = 5;
+      dayRating.classList.remove(...dayRating.classList);
+      dayRating.classList.add("slider");
+      dayRating.classList.add(String(5));'>
+        <fieldset>
+          <legend id="dateLegend">8-4-2021</legend>
+          <label for="dayRating">Rate your day: </label>
+          <span id="dayValue">5</span>
+          <br>
+          <input type="range" min="0" max="10" value="5" class="slider" id="dayRating" oninput='dayValue.textContent = dayRating.value;
+          dayRating.classList.remove(...dayRating.classList);
+          dayRating.classList.add("slider");
+          dayRating.classList.add(String(dayRating.value));'>
+          <br>
+          <label for="dayBody">How was your day?</label>
+          <br>
+          <textarea rows="5" cols="30" id="dayBody" style="width: 100%"></textarea>
+          <br>
+          <button type="reset" value="reset" style="float:left;">Reset</button>
+          <input type="button" value="Delete" id="deleteBtn" style="float:left;">
+          <input type="button" value="Submit" id="submit" style="float: right;">
+        </fieldset>
+      </form>
+    </div>
+  </main>
+
+  <!-- Main Script -->
+  <script src="./sources/scripts/script.js" type="module"></script>
+</body>
+
+</html>

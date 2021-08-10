@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <title>Bullet Journal</title>
+  <meta name="keywords" content="journal" />
+  <meta name="author" content="Frozon" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="./sources/styles.css" />
+  <link rel="stylesheet" href="./sources/calender.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" crossorigin="anonymous">
+  <link rel="icon" href="favicon.ico">
+</head>
+
+<body class="main-view default-view">
+  <header>
+    <ul>
+      <li><i id="menu-bar" class="fas fa-bars fa-lg" style="color: #f8f8ff; padding: 15.6px; cursor: pointer;"></i></li>
+      <li><a class="active" href="/">Home</a></li>
+      <li><a href="/signup">Signup</a></li>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/logout" id='logout-button'>Logout</a></li>
+      <li><a href="/demo">Demo</a></li>
+      <li class="header-text">Bullet Journal</li>
+    </ul>
+    <div class="header"></div>
+  </header>
+  <main>
+
+    <div id="left_menu" style="display: none;">
+      <div class="left-container">
+        <div class="calendar">
+          <div class="front">
+            <div class="current-date">
+              <i class="fas fa-angle-left" style="color: white; padding: 10px;"></i>
+              <h1 id="monthVal">January 2016</h1>
+              <i class="fas fa-angle-right" style="color: white; padding: 10px;"></i>
+            </div>
+            <div class="current-month">
+              <ul class="week-days">
+                <li>SUN</li>
+                <li>MON</li>
+                <li>TUE</li>
+                <li>WED</li>
+                <li>THU</li>
+                <li>FRI</li>
+                <li>SAT</li>
+              </ul>
+              <div class="weeks">
+                <div class="first">
+                  <span class="last-month">28</span>
+                  <span class="last-month">29</span>
+                  <span class="last-month">30</span>
+                  <span class="last-month">31</span>
+                  <span>01</span>
+                  <span>02</span>
+                  <span>03</span>
+                </div>
+                <div class="second">
+                  <span>04</span>
+                  <span>05</span>
+                  <span class="event">06</span>
+                  <span>07</span>
+                  <span>08</span>
+                  <span>09</span>
+                  <span>10</span>
+                </div>
+                <div class="third">
+                  <span>11</span>
+                  <span>12</span>
+                  <span>13</span>
+                  <span>14</span>
+                  <span class="active">15</span>
+                  <span>16</span>
+                  <span>17</span>
+                </div>
+                <div class="fourth">
+                  <span>18</span>
+                  <span>19</span>
+                  <span>20</span>
+                  <span>21</span>
+                  <span>22</span>
+                  <span>23</span>
+                  <span>24</span>
+                </div>
+                <div class="fifth">
+                  <span>25</span>
+                  <span>26</span>
+                  <span>27</span>
+                  <span>28</span>
+                  <span>29</span>
+                  <span>30</span>
+                  <span>31</span>
+                </div>
+                <div class="sixth"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="category-container" style="margin-bottom: 60px">
+        <div class="category-header">
+          <i id="category-show" class="fas fa-angle-right fa-lg" style="padding: 5px; margin: 0px 5px;"></i>
+          <h2 id="category-name" style="color: #f78536; cursor: pointer;">Category</h2>
+          <input id="category-toggle" type="checkbox">
+          <i id="new-category" class="fas fa-plus fa-lg"></i>
+        </div>
+        <div class="category-box expandable" id="box-expand" style="display: none;"></div>
+      </div>
+    </div>
+    <div id="left_filler" style="width: 400px; display: none;"></div>
+
+    <div class="container">
+      <div class="section-container">
+        <div class="journal-main-box">
+          <div class="entry-list"></div>
+          <div class="bullet new-button" id="add-bullet-button">
+            <div id="plus-sign" style="padding-right: 10px;"><i class="fas fa-plus"></i></div>
+            <div id="new-bullet-text">New Bullet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- journal-entry web component -->
+  <script src="./sources/components/bulletEntry.js" type="module"></script>
+  <script src="./sources/components/categoryEntry.js" type="module"></script>
+  <script src="./sources/components/dateEntry.js" type="module"></script>
+
+  <!-- Main Script -->
+  <script src="./sources/scripts/script.js" type="module"></script>
+</body>
+
+</html>

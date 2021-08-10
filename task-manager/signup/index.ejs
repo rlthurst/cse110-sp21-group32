@@ -1,32 +1,35 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="./index.js"></script>
     <link rel="stylesheet" type="text/css" href="./index.css">
 </head>
-
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a class="active" href="/signup">Signup</a></li>
+    <li><a href="/login">Login</a></li>
+    <li><a href="/logout">Logout</a></li>
+    <li><a href="/demo">Demo</a></li>
+    <span class="header-text">Bullet Journal</spab>
+  </ul>
 <body>
-    <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/signup">Signup</a></li>
-        <li><a class="active" href="/login">Login</a></li>
-        <li><a href="javascript:this.click();" id='logout-button'>Logout</a></li>
-        <li><a href="javascript:this.click();" id='user-button'>Fetch</a></li>
-        <span class="header-text">Bullet Journal</spab>
-      </ul>
     <div class='container'>
         <div class='section'>
-            <form id='log-in'>
+            <form id='sign-up' action="https://pageus.site/signup" method="POST">
                 <table border="0" cellpadding="10" cellspacing="1" width="500" align="center" class="tblLogin">
                     <tr class="tableheader">
-                    <td align="center" colspan="2">Login</td>
+                    <td align="center" colspan="2">Sign Up</td>
+                    </tr>
+                    <tr>
+                    <% for (let i=0; i<errors.length; i++) {%>
+                        <td align="center" colspan="2"><%= errors[i] %></td>
+                    <% } %>
                     </tr>
                     <tr class="tablerow">
                     <td>
-                    <input type="text" name="userName" placeholder="User Name" class="login-input"></td>
+                    <input type="text" name="username" placeholder="User Name" class="login-input"></td>
                     </tr>
                     <tr class="tablerow">
                     <td>
