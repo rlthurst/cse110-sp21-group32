@@ -1,7 +1,10 @@
+import * as calender from "./calender.js";
+
 var myStorage = window.localStorage;
 export var bulletArr;
 export var categoryArr;
-export var dateArr;
+export var dateMap;
+var dateArr = [];
 
 // Only store actives in current session
 export var activeCategories = new Map();
@@ -20,14 +23,17 @@ if (myStorage.getItem("categoryArr")) {
   categoryArr = [];
 }
 if (myStorage.getItem("dateArr")) {
+  dateMap = new Map();
   dateArr = JSON.parse(myStorage.getItem("dateArr"));
-  console.log(dateArr);
+  dateArr.forEach(element => dateMap.set(element));
+  console.log(dateMap);
 } else {
-  dateArr = [];
+  dateMap = new Map();
 }
 
 // Today's date
 let today = new Date();
+console.log(new Date("2021-07-07").getDay())
 export var todayDate = today.getFullYear();
 if (today.getMonth() + 1 < 10) {
   todayDate += "-0" + (today.getMonth()+1);
@@ -47,8 +53,10 @@ export function updateCategory() {
   myStorage.setItem("categoryArr", JSON.stringify(categoryArr));
 }
 export function updateDate() {
+  dateArr = Array.from(dateMap.keys())
   myStorage.setItem("dateArr", JSON.stringify(dateArr));
 }
+
 
 /**
  * Delete bullet from storage
@@ -76,17 +84,10 @@ export function deleteBullet(bullet) {
 
   // If last entry in date, delete date
   if (dateEntryCount == 1) {
-    let i = 0;
-    for (let dateItem of dateArr) {
-      if (dateItem.date == bullet.date) {
-        dateArr.splice(i, 1);
-        updateDate();
-        activeDates.delete(dateItem.date);
-        buildDate();
-        break;
-      }
-      i++;
-    }
+    dateMap.delete(bullet.date)
+    updateDate();
+    activeDates.delete(bullet.date);
+    buildDate();
     buildCurrent();
   }
 }
@@ -163,28 +164,13 @@ export function editBullet(newBullet, oldBullet) {
   if (newBullet.date != oldBullet.date) {
     // If last entry in date, delete date
     if (dateEntryCount == 1) {
-      let i = 0;
-      for (let dateItem of dateArr) {
-        if (dateItem.date == oldBullet.date) {
-          dateArr.splice(i, 1);
-          activeDates.delete(dateItem.date);
-          break;
-        }
-        i++;
-      }
+      dateMap.delete(oldBullet.date);
+      activeDates.delete(oldBullet.date);
     }
 
     // Add new date if it does not exist
-    let dateExists = false;
-    dateArr.forEach(function (item) {
-      if (item.date == newBullet.date) {
-        dateExists = true;
-      }
-    });
-    if (!dateExists) {
-      let newDateObj = { date: newBullet.date, active: "false" };
-      dateArr.push(newDateObj);
-    }
+    dateMap.set(newBullet.date);
+
     updateDate();
     buildCurrent();
     buildDate();
@@ -258,18 +244,9 @@ export function addBullet(obj) {
   }
 
   // Add new date if it does not exist
-  let dateExists = false;
-  dateArr.forEach(function (item) {
-    if (item.date == newBullet.date) {
-      dateExists = true;
-    }
-  });
-  if (!dateExists) {
-    let newDateObj = { date: newBullet.date, active: "false" };
-    dateArr.push(newDateObj);
-    updateDate();
-    buildDate();
-  }
+  dateMap.set(newBullet.date);
+  updateDate();
+  buildDate();
   buildCurrent();
 }
 
@@ -296,7 +273,6 @@ export function addCategory(obj) {
  * Build initial screen
  */
 export function buildDefault() {
-  const historyPane = document.querySelector(".journal-box-history");
   const categoryPane = document.querySelector(".category-box");
   activeCategories.clear();
   activeDates.clear();
@@ -382,80 +358,7 @@ export function buildCurrent() {
  * Call to update date viewer in real time
  */
 function buildDate() {
-  const historyPane = document.querySelector(".journal-box-history");
-  while (historyPane.firstChild) {
-    historyPane.firstChild.remove();
-  }
-
-  // Sort lmao
-  const sortedDates = dateArr.sort(
-    (a, b) => new Date(b.date) - new Date(a.date)
-  );
-
-  // Create each date from sorted date arr
-  let builtDefault = false;
-  sortedDates.forEach(function (item) {
-    // Put default today Date in correct order
-    if (new Date(item.date) <= new Date(todayDate) && !builtDefault) {
-      let defaultDate = document.createElement("date-entry");
-      defaultDate.date = todayDate;
-      if (activeDates.has(todayDate)) {
-        defaultDate.active = "true";
-      } else {
-        defaultDate.active = "false";
-      }
-      historyPane.appendChild(defaultDate);
-      builtDefault = true;
-    }
-    // Create all dates from sortedDate
-    if (item.date != todayDate) {
-      let newDate = document.createElement("date-entry");
-      if (activeDates.has(item.date)) {
-        newDate.active = "true";
-      } else {
-        newDate.active = "false";
-      }
-      newDate.date = item.date;
-      historyPane.appendChild(newDate);
-    }
-  });
-  // Build default Today date if not built yet
-  if (!builtDefault) {
-    let defaultDate = document.createElement("date-entry");
-    defaultDate.date = todayDate;
-    if (activeDates.has(todayDate)) {
-      defaultDate.active = "true";
-    } else {
-      defaultDate.active = "false";
-    }
-    historyPane.appendChild(defaultDate);
-  }
-
-  updateDateBackground();
-}
-
-/**
- * Checks how many active days are selected
- * If none are selected, greys out the whole date selector box
- */
-export function updateDateBackground() {
-  let historyPane = document.querySelector(".journal-box-history");
-  let dates = document.querySelectorAll("date-entry");
-  if (activeDates.size == 0) {
-    historyPane.style.backgroundColor = "rgb(202, 207, 210)";
-    dates.forEach((date) => {
-      date.disabled = true;
-    });
-  } else {
-    historyPane.style.backgroundColor = "rgb(210, 221, 232)";
-    dates.forEach((date) => {
-      if (activeDates.has(date.date)) {
-	date.active = "true";
-      } else {
-	date.active = "false";
-      }
-    });
-  }
+  calender.buildCalender(0, dateMap, activeDates);
 }
 
 /**
@@ -482,12 +385,11 @@ export function updateActiveCategories(categoryObj, build) {
  * @param {*} dateObj - date object used to update the active dates
  */
 export function updateActiveDates(dateObj) {
-  if (dateObj.active == "true") {
-    activeDates.delete(dateObj.date);
-    dateObj.active = "false";
+  if (dateObj.classList.contains("active")) {
+    activeDates.delete(dateObj.title);
   } else {
-    activeDates.set(dateObj.date);
-    dateObj.active = "true";
+    activeDates.set(dateObj.title);
   }
+  dateObj.classList.toggle("active");
   buildCurrent();
 }

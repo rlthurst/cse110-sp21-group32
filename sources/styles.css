@@ -1,133 +1,86 @@
 html,
 body {
+  margin: 0;
+  padding: 0;
   height: 100vh;
   width: 100vw;
-  margin: 0.01px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  min-width: 600px;
+	font-family: calibri;
+  border-top: none;
+}
+
+/* Header CSS */
+header ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  width: 100vw;
+  z-index: 100;
+  min-width: 600px;
+	font-family: calibri;
+}
+header li {
+  float: left;
+}
+header li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+.fa-bars:hover {
+background-color: #111;
+}
+/* Change the link color to #111 (black) on hover */
+header li a:hover {
+  background-color: #111;
+}
+.active {
+  background-color: #4CAF50;
+}
+.header-text {
+  padding: 14px 16px;
+  color: white;
+  float: right;
 }
 
 /* This is a style css to the index.html in the root */
-body {
-  margin: 0.01px;
-  overflow-y: auto;
-  overflow-x: auto;
-  background-color: rgb(173, 210, 244);
-  height: 100vh;
-  width: 100vw;
-  min-width: 700px;
-  font-family: sans-serif;
-}
 
 /* Stlying for the first cell(top left cell, add button) */
 .header {
-  width: 100vw;
-  height: 8vh;
-  margin: 0.1px;
+  height: 47.2px;
+  margin: 0;
+  padding: 0;
   background-color: rgb(9, 65, 114);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 2rem;
   color: rgb(246, 248, 250);
-  min-height: 52px;
-}
-
-main {
-  height: 91vh;
-  width: 100vw;
-  margin: 0.01px;
 }
 
 /* Styling for the main container that will hold all our cells */
 body.main-view main .container {
-  height: 89vh;
-  width: 97vw;
-  margin: 0.01px;
   padding-left: 1vw;
   padding-right: 1vw;
-  display: grid;
-  grid-template-areas:
-    "history      main cateMa"
-    "history   main cateMa"
-    "history    main cateMa";
-  grid-template-rows: 0.5fr 2fr 1.5fr;
-  grid-template-columns: 1fr 2fr 1fr;
   position: relative;
   z-index: initial;
-}
-
-/* Stlying for the second cell (Middle left cell, Overdue) */
-body.main-view main .cell-2 {
-  grid-area: history;
-  height: 88vh;
-}
-
-/* Stlying for the fourth cell (Center cell, Focus) */
-body.main-view main .cell-4 {
-  grid-area: main;
-  height: 88vh;
-  margin: 0.01px;
-  padding: 0.01px;
-}
-
-/* Stlying for the fith cell(right cell, Categories) */
-body.main-view main .cell-5 {
-  grid-area: cateMa;
-  height: 88vh;
-}
-
-/* Styling for all the non-header text */
-body.main-view main .cell {
-  color: black;
-  text-align: center;
-  padding-left: 1vw;
-  padding-right: 1vw;
+  flex: 1;
+  overflow-x: hidden;
 }
 
 /* Styling for the Section containers */
 body.main-view main .section-container {
   text-align: left;
-  height: inherit;
-}
-
-/* Styling for the headers in the left cells (Overdue and Graph) */
-body.main-view main .section-header-side {
-  color: rgb(120, 120, 120);
-  font-size: 5vh;
-  height: 10vh;
-  display: table-cell;
-  vertical-align: bottom;
-  padding-bottom: 0.7rem;
-  margin: 0.01px;
-}
-
-/* Styling for the headers in the middle and left cells (Focus and Categories) */
-body.main-view main .section-header-main {
-  color: rgb(9, 44, 82);
-  font-size: 9vh;
-  height: 11vh;
-  display: table-cell;
-  vertical-align: bottom;
-  min-height: 75px;
-  margin: 0.01px;
-}
-
-/* Styling for the journal entries shown in the history box */
-body.main-view main .journal-box-history {
-  background-color: rgb(210, 221, 232);
-  height: 75vh;
-  padding: 1.5vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  text-align: justify;
-  border-width: 2px;
-  border-style: solid;
-  border-color: rgb(40, 25, 3);
-  border-radius: 1em;
-}
-
-/* Setting the display for the history box scrollbar */
-body.main-view main .journal-box-history::-webkit-scrollbar {
-  display: none;
+  height: auto;
+  display: flex;
+  justify-content: center;
 }
 
 /* Styling for bullet entries that appear in all cells */
@@ -140,19 +93,6 @@ body.main-view main .bullet {
   border-radius: 0.5em;
   margin: 0.3rem;
   text-align: left;
-  padding-left: 0.5rem;
-}
-
-/* Styling for date entries */
-body.main-view main .date {
-  display: grid;
-  align-items: center;
-  height: 3em;
-  font-size: 1.3em;
-  background-color: rgba(167, 200, 220, 0.925);
-  border-radius: 0.5em;
-  margin: 0.3rem;
-  text-align: center;
   padding-left: 0.5rem;
 }
 
@@ -194,120 +134,21 @@ body.main-view main .graph-box {
   border-radius: 1em;
 }
 
-/* Setting the display for the graph box scrollbar */
-body.main-view main .graph-box::-webkit-scrollbar {
-  display: none;
-}
-
 /* Styling for the box that contains journal entries in the main cell, cell 4 (Focus) */
 body.main-view main .journal-main-box {
-  background-color: rgb(210, 221, 232);
-  height: 75vh;
   padding: 1.5vh;
   overflow-x: hidden;
   overflow-y: auto;
   text-align: justify;
-  border-style: solid;
-  border-color: rgb(40, 25, 3);
-  border-radius: 1em;
-}
-
-/* Setting the display for the graph box scrollbar */
-body.main-view main .journal-main-box::-webkit-scrollbar {
-  display: none;
-}
-
-/* Styling for month selection (Not currently used) */
-body.main-view main .MonthSection {
-  margin-top: 0.3rem;
-  margin-bottom: 1.5rem;
-  border-width: 2px;
-}
-
-.big-button:active {
-  box-shadow: 0 5px #369;
-  -webkit-transform: scale(0.95) !important;
-  transform: scale(0.95) !important;
-}
-
-/* Styling for the big buttons when mouse is hovered over (Add Category, select all, deselect all) */
-body.main-view main .big-button {
-  cursor: pointer;
-  font-size: 1.5em;
-  display: grid;
-  justify-items: center;
-  align-items: center;
-  height: 4.6vh;
-  border-radius: 0.3em;
-  margin-top: 1.5vh;
-  margin-bottom: 1.5vh;
-  margin-left: 0.6rem;
-  margin-right: 0.6rem;
-  vertical-align: middle;
-  background-color: rgb(72, 116, 142);
-  -webkit-transform: perspective(1px) translateZ(0);
-  transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
-  -webkit-transition-duration: 0.3s;
-  transition-duration: 0.3s;
-  -webkit-transition-property: transform;
-  transition-property: transform;
-}
-
-body.main-view main .big-button:hover,
-body.main-view main .big-button:active {
-  -webkit-transform: scale(1.05);
-  transform: scale(1.05);
-}
-
-/* Stlying for box containing the categories in cell 5 */
-body.main-view main .category-box {
-  background-color: rgb(210, 221, 232);
-  height: 56vh;
-  padding: 1.5vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  text-align: justify;
-  border-style: solid;
-  border-color: rgb(40, 25, 3);
-  border-radius: 1em;
-}
-
-/* Setting the display for the category box scrollbar */
-body.main-view main .category-box::-webkit-scrollbar {
-  display: none;
-}
-
-/* Styling for our demo Category */
-body.main-view main .category-inner-entry {
-  height: 3.5em;
-  font-size: 2em;
-  background-color: antiquewhite;
-  border-width: 0.5px;
-  border-style: solid;
-  border-radius: 0.5em;
-  margin: 0.3rem;
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  padding: 0.5rem;
-}
-
-/* Stlying for category edit button */
-body.main-view main .cate-button {
-  margin: 0.5rem;
-  line-height: 3rem;
-  font-size: 1rem;
-  background-color: aquamarine;
+  display: inline-block;
 }
 
 /* Styling for add bullet button in top left corner */
 body.main-view main #add-bullet-button {
-  display: grid;
-  justify-items: center;
-  align-items: cente;
-  text-align: justify;
+  display: flex;
   padding: 1px;
+  justify-content: center;
+  min-width: 222px;
 }
 
 body.main-view main .new-button {
@@ -323,37 +164,6 @@ body.main-view main .new-button:hover {
 body.main-view main .new-button:active {
   background-color: rgb(32, 102, 145);
 }
-
-/* Default main-view */
-body.default-view cate-editor-page {
-  display: none;
-}
-
-body.default-view bullet-editor-page {
-  display: none;
-}
-
-/* Bullet Editor CSS Start */
-body.bulletEditor cate-editor-page {
-  display: none;
-}
-
-body.bulletEditor bullet-editor-page {
-  display: block;
-}
-
-/* Bullet Editor CSS End */
-
-/* Cate Editor CSS Start */
-body.cateEditor bullet-editor-page {
-  display: none;
-}
-
-body.cateEditor cate-editor-page {
-  display: block;
-}
-
-/* Cate Editor CSS End */
 
 /* For Testing Purpose */
 .des {
@@ -408,28 +218,6 @@ body.cateEditor cate-editor-page {
   color: #0994ff;
 }
 
-body.main-view main .date:active {
-  display: grid;
-  align-items: center;
-  height: 3em;
-  font-size: 1.3em;
-  background-color: rgba(60, 77, 87, 0.925);
-  border-radius: 0.5em;
-  margin: 0.3rem;
-  text-align: center;
-}
-
-body.main-view main .date:hover {
-  display: grid;
-  align-items: center;
-  height: 3em;
-  font-size: 1.3em;
-  background-color: rgba(123, 151, 169, 0.925);
-  border-radius: 0.5em;
-  margin: 0.3rem;
-  text-align: center;
-}
-
 .bullet.new-button {
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
@@ -445,9 +233,123 @@ body.main-view main .date:hover {
 }
 
 .bullet.new-button:hover {
-  background-color: rgba(255, 255, 255, 0.379) !important;
+  background-color: rgba(25, 25, 25, 0.379) !important;
 }
 
 .bullet.new-button:active {
   background-color: white !important;
 }
+
+/* Dank */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  overflow-y: hidden;
+}
+
+#left_menu {
+    box-sizing: border-box;
+    width: 400px;
+    height: 100vh;
+    padding-top: 25px;
+    padding-left: 35px;
+    padding-right: 35px;
+    position: fixed;
+    left: 0;
+    transition: left .25s cubic-bezier(.4,0,.2,1);
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #fafafa;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    background-color: #333;
+    display: flex;
+    z-index: 100;
+}
+
+.category-header {
+  padding: 5px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#category-show {
+  color: rgb(192,192,192);
+  -webkit-transition: 0.15s ease-in-out;
+  -moz-transition: 0.15s ease-in-out;
+  -o-transition: 0.15s ease-in-out;
+  transition: 0.15s ease-in-out;
+}
+
+.category-open {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+#category-toggle {
+  margin-left: auto;
+  -webkit-appearance: none;
+  background-color: #fafafa;
+  padding: 10px;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+  margin-right: 5px;
+}
+
+#category-toggle:checked::after {
+  content: "✔";
+  font-size: 20px;
+  position: absolute;
+  top: -4px;
+  left: 3px;
+  color: black;
+  animation: fade-up 0.8s ease;
+}
+
+#new-category {
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+  background-color: transparent;
+  border-radius: 100%;
+}
+
+#new-category:hover {
+  background-color: rgba(25, 25, 25, 0.379) !important;
+}
+
+/*
+.expandable {
+  background: #fff;
+  overflow: hidden;
+  display: none;
+
+  transition: all .5s ease-in-out;
+  line-height: 0;
+  padding: 0 1em;
+  color: transparent;
+}
+ 
+.expandable:target {
+  display: block;
+  line-height: 1.5;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  color: black;
+}
+*/
+

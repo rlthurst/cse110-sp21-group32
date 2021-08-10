@@ -1,5 +1,3 @@
-import * as storage from "../scripts/storage.js";
-
 class BulletEntry extends HTMLElement {
   constructor() {
     super();
@@ -44,6 +42,7 @@ class BulletEntry extends HTMLElement {
               padding-left: 0.5rem;
               animation: slide-up 0.4s ease;
               position: relative;
+              max-width: 875px;
 
               vertical-align: middle;
               -webkit-transform: perspective(1px) translateZ(0);
@@ -96,28 +95,27 @@ class BulletEntry extends HTMLElement {
             
             .bullet-entry .title {
               text-align: left;
-              padding-left: 1rem;
-              width: 90%;
-              height: 50%;
-              display: flex;
-              align-items: center;
-              min-width:30px;
-              min-hight:30px;
+              height: 25.6px;
+              cursor: text;
+              padding: 0px 10px;
+              max-width: 650px;
+              overflow: hidden;
+              margin-right: 10px;
             }
             .bullet-entry .des{
               overflow:expand;
               display:none;
               align-items: center;
               height: auto;
+              max-width: 825px;
           
               background-color: rgba(167, 200, 220, 0.925);
               font-size: 1em;
               border-radius: 0.5em;  
               margin:0.5rem;
               text-align: left;
-              margin-left: 2rem;
+              margin-left: 1.5rem;
               padding: 0.5rem;
-              padding-left: 1.2rem;
               opacity: 1;
             }
             .bullet-entry .date{
@@ -158,6 +156,7 @@ class BulletEntry extends HTMLElement {
               width:30px;
               display: flex;
               align-items: center;
+              padding-right: 1rem;
             }
 
             .dot{
@@ -197,6 +196,9 @@ class BulletEntry extends HTMLElement {
 			        padding: 20px;
 			        min-height:200px;
               display: block;
+              cursor: text;
+              max-width: 800px;
+              word-wrap: break-word;
             }
             .sample-toolbar{
 			        border:solid 1px #ddd;
@@ -205,13 +207,20 @@ class BulletEntry extends HTMLElement {
 			        border-radius:3px;
             }
 
-            .bullet-entry .bullet:hover i,
-            .bullet-entry .bullet:hover #bullet-category,
-            .bullet-entry .bullet:hover label,
-            .bullet-entry .bullet:hover .down{
+            .bullet:hover #left-buttons > i,
+            .bullet:hover #bullet-category,
+            .bullet:hover #left-buttons > label,
+            .bullet:hover .down{
               opacity:1;
+              cursor: pointer;
+            }
+            .bullet:hover .title {
+              border-bottom: outset;
             }
 
+            .bullet:hover {
+              cursor: help;
+            }
 
             .sample-toolbar > i{
 			        cursor:pointer;
@@ -221,14 +230,24 @@ class BulletEntry extends HTMLElement {
               color: #d60e96;
 		        }
 
-            .bullet > i,
-            .bullet > label{
-              opacity:0;
-              padding-right:3.5%;
-              color: #585a5c;
+            #left-buttons {
+              display: flex;
+              flex-direction: row;
+              align-self: flex-end;
+              float: right;
+              padding-right: 20px;
+
             }
-            .bullet > i:hover,
-            .bullet > label:hover,
+
+            #left-buttons > i,
+            #left-buttons > label{
+              opacity:0;
+              padding: 0px 10%;
+              color: #585a5c;
+              margin-left: auto;
+            }
+            #left-buttons > i:hover,
+            #left-buttons > label:hover,
             #bullet-date:hover + #calender {
               color: #272a3b;
             }
@@ -242,20 +261,17 @@ class BulletEntry extends HTMLElement {
               border: none;
               border-color: coral;
               
-              margin-left: 3%;
-              margin-right: 3%;
+              margin-right: 5px;
               padding:1%;
-              width: 20%;
-              min-width:120px;
 
               text-align-last:center;
-              padding-right: 5px;
               direction: rtl;
 
               font-family: inherit;
               font-size: inherit;
               cursor: inherit;
               line-height: inherit;
+              margin-left: auto;
             }
 
             #bullet-category:hover{
@@ -308,24 +324,18 @@ class BulletEntry extends HTMLElement {
                 </span>
 
                 <span class="title" id="bullet-title"
-                  onkeydown="if(event.key == 'Enter'){event.preventDefault()}">
+                  onkeydown="if(event.key == 'Enter'){event.preventDefault()}"> 
                 </span>
                 <select id="bullet-category" name="category">
                   <option value='{"title":"Default","color":"Blue"}'>Default</option>
-                  <option value='{"title":"a","color":"Blue"}'>a</option>
-                  <option value='{"title":"v","color":"Blue"}'>v</option>
-                  <option value='{"title":"c","color":"Blue"}'>c</option>
-                </select><br>
+                </select>
 
                 
                 
-                
-                <label for="bullet-date" class="fas fa-calendar" id="calender" style="z-index:0;"><input type="date" id="bullet-date"></label>
-                
-                
-
-                <i class="fas fa-info-circle bullet-detail-button"></i>
-                <i class="fas fa-trash" id ="bullet-delete"></i>
+                <div id="left-buttons">
+                  <label for="bullet-date" class="fas fa-calendar" id="calender" style="z-index:0;"><input type="date" id="bullet-date"></label>
+                  <i class="fas fa-trash" id ="bullet-delete"></i>
+                </div>
 
 
                 <button class="bullet-button edit-bullet-button">edit</button>

@@ -33,8 +33,7 @@ class CategoryEntry extends HTMLElement {
           }
 
            .cate-entry .category-inner-entry{
-              height: 3.5em;
-              font-size: 2em;
+              font-size: 1em;
               background-color:  rgba(167, 200, 220, 0.925);
               border-radius: 0.5em;  
               margin:0.3rem;
@@ -94,16 +93,16 @@ class CategoryEntry extends HTMLElement {
             }
             .cate-entry .title {
               text-align: left;
-              padding-left: 20px;
-              padding-right: 10px;
-              width: 70%;
-              min-width: 30px;
-              min-height: 30px;
+              padding: 0px 10px;
+              overflow: hidden;
+              cursor: text;
+              height: 19.2px;
+              margin-left: 5px;
             }
             .checkbox {
               -webkit-appearance: none;
               background-color: #fafafa;
-              padding: 15px;
+              padding: 10px;
               border-radius: 3px;
               display: inline-block;
               position: relative;
@@ -111,11 +110,11 @@ class CategoryEntry extends HTMLElement {
             
             .checkbox:checked:after {
               content: "\u2714";
-              font-size: 50px;
+              font-size: 20px;
               position: absolute;
-              top: -20px;
-              left: 5px;
-              color: #0994ff;
+              top: -4px;
+              left: 3px;
+              color: black;
               animation: fade-up 0.8s ease;
             }
 
@@ -123,12 +122,14 @@ class CategoryEntry extends HTMLElement {
             .category-inner-entry:hover #color{
               opacity:1;
             }
+            .category-inner-entry:hover .title {
+              border-bottom: outset;
+            }
 
             .category-inner-entry > i{
               opacity:0;
-              padding-right:5%;
-              padding-left:1%;
               color: #585a5c;
+              cursor: pointer;
             }
             .category-inner-entry > i:hover{
               color: #272a3b;
@@ -143,20 +144,16 @@ class CategoryEntry extends HTMLElement {
               border: none;
               border-color: coral;
               
-              margin-left: 3%;
+              margin-left: auto;
               margin-right: 3%;
               padding:1%;
-              width: 35%;
-              height: 50%;
-              min-width: 55px;
 
               text-align-last:center;
-              padding-right: 5px;
               direction: rtl;
 
               font-family: inherit;
               font-size: 15px;
-              cursor: inherit;
+              cursor: pointer;
               line-height: inherit;
             }
 

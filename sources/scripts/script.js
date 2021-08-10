@@ -15,7 +15,7 @@ bulletAddButton.addEventListener("click", addBulletHandler);
  * When the add bullet button is clicked, this function is called to set the state so that the add
  * bullet modal pops up
  */
-function addBulletHandler() {
+function addBulletHandler(e) {
   let defaultCategory = {
     title: "Default",
     color: "Blue",
@@ -32,8 +32,21 @@ function addBulletHandler() {
     bullet: newBullet,
   };
   storage.addBullet(newObj);
+
+  // Make new bullet editable TODO
+  let newEntry;
+  let entries = document.querySelector(".entry-list").children;
+  for (let entry of entries){
+    if(JSON.stringify(entry.bullet) == JSON.stringify(newBullet)){
+      newEntry = entry;
+    }
+  }
+  oldElement = newBullet;
+  activeTitle = newEntry.shadowRoot.getElementById("bullet-title");
+  activeTitle.contentEditable = true;
+  console.log(activeTitle)
 }
-var cateAddButton = document.getElementById("add-cate-button");
+var cateAddButton = document.getElementById("new-category");
 cateAddButton.addEventListener("click", addCateHandler);
 
 /**
@@ -58,6 +71,7 @@ function addCateHandler() {
  */
 addEventListener("DOMContentLoaded", () => {
   storage.buildDefault();
+  document.getElementById("category-toggle").checked = true;
 });
 
 /**
@@ -65,8 +79,9 @@ addEventListener("DOMContentLoaded", () => {
  * Note that submit events also register as clicks
  */
 document.addEventListener("click", (e) => {
-  // Handle inline edit category/bullet title event
   console.log(e.composedPath()[0]);
+
+  // Handle inline edit category/bullet title event
   if (
     activeTitle &&
     e.composedPath()[0].id != "bullet-title" &&
@@ -90,15 +105,27 @@ document.addEventListener("click", (e) => {
     activeTitle = null;
   }
 
-  //Show category
-  if (e.composedPath()[0].id == "category-toggle") {
-    let bullet = e.composedPath()[0].getRootNode().host;
-    bullet.showCategoryList = true;
+  // Toggle menu bar
+  if (e.composedPath()[0].id == "menu-bar") {
+    let menu = document.getElementById("left_menu");
+    let filler = document.getElementById("left_filler");
+    console.log(menu.style.display);
+    console.log(filler.style.display);
+    if(menu.style.display == 'none'){
+      menu.style.display = 'block';
+      filler.style.display = 'flex';
+    }
+    else {
+      menu.style.display = 'none';
+      filler.style.display = 'none';
+    }
+
   }
+
 
   // Click showDetail button
   if (
-    e.composedPath()[0].className == "fas fa-info-circle bullet-detail-button"
+    e.composedPath()[0].className == "bullet"
   ) {
     showDetail(e.composedPath()[0]);
   }
@@ -134,23 +161,36 @@ document.addEventListener("click", (e) => {
     deleteCategory(e.composedPath()[0].getRootNode().host);
   }
 
-  // Select all categories
-  if (e.composedPath()[0].id == "select-all") {
-    let categoryElements = document.querySelectorAll("category-entry");
-    categoryElements.forEach((element) => {
-      element.checked = true;
-      storage.updateActiveCategories(element, false);
-    });
-    storage.buildCurrent();
+  // Toggle expand categories
+  if (e.composedPath()[0].className == "category-header" ||
+      e.composedPath()[0].id == "category-show" ||
+      e.composedPath()[0].id == "category-name") {
+    let toggle = document.getElementById("category-show");
+    if(toggle.classList.contains("category-open")){
+      toggle.classList.remove("category-open");
+      document.getElementById("box-expand").style.display = "none";
+    }
+    else{
+      toggle.classList.add("category-open")
+      document.getElementById("box-expand").style.display = "initial";
+    }
   }
 
-  // Deselect all categories
-  if (e.composedPath()[0].id == "deselect-all") {
+  // Toggle select all/no categories
+  if (e.composedPath()[0].id == "category-toggle") {
     let categoryElements = document.querySelectorAll("category-entry");
-    categoryElements.forEach((element) => {
-      element.checked = false;
-      storage.updateActiveCategories(element, false);
-    });
+    if(e.composedPath()[0].checked == true){
+      categoryElements.forEach((element) => {
+        element.checked = true;
+        storage.updateActiveCategories(element, false);
+      });
+    }
+    else{
+      categoryElements.forEach((element) => {
+        element.checked = false;
+        storage.updateActiveCategories(element, false);
+      });
+    }
     storage.buildCurrent();
   }
 
@@ -160,10 +200,9 @@ document.addEventListener("click", (e) => {
     storage.updateActiveCategories(categoryElement, true);
   }
   // Select date event
-  if (e.composedPath()[0].className == "date") {
-    let dateElement = e.composedPath()[0].getRootNode().host;
+  if (e.composedPath()[0].classList.contains("date")) {
+    let dateElement = e.composedPath()[0];
     storage.updateActiveDates(dateElement);
-    storage.updateDateBackground();
   }
   // Check bullet event
   if (e.composedPath()[0].id == "bullet-check") {
@@ -298,20 +337,6 @@ document.addEventListener("input", (e) => {
   }
 });
 
-// Grey out historyPane background if no active dates
-function updateDateBackground() {
-  let historyPane = document.querySelector(".journal-box-history");
-  let dates = document.querySelectorAll("date-entry");
-  if (storage.activeDates.size == 0) {
-    historyPane.style.backgroundColor = "rgb(202, 207, 210)";
-    dates.forEach((date) => {
-      date.disabled = true;
-    });
-  } else {
-    historyPane.style.backgroundColor = "rgb(210, 221, 232)";
-  }
-}
-
 /**
  * Helper function for bullet to fade if completed
  * @param {*} check  - Check whether or not the box has been checked
@@ -381,4 +406,4 @@ function deleteCategory(categoryObj) {
   categoryObj.remove();
 }
 
-export { updateDateBackground, fadeBullet, showDetail, deleteBullet, deleteCategory };
+export { fadeBullet, showDetail, deleteBullet, deleteCategory };
