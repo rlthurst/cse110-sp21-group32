@@ -2,6 +2,7 @@
 Local: https://rlthurst.github.io/task-manager/
 
 Live: https://pageus.site
+// TODO to be rehosted
 
 ### Known working versions/systems
 
